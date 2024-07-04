@@ -94,6 +94,17 @@ for url in api_urls:
         json_response = response.json()
         print(json_response["data"], "\n", json_response["headers"]["Content-Type"])
 
+        # Request Inspection
+        print()
+        # 透過檢查 .request 查看 PreparedRequest 物件，可以取得 request 的 headers、url、body... 各種資訊
+        response = requests.post("https://httpbin.org/post", json={"key": "value"})
+        req_headers = response.request.headers["Content-Type"]
+        print(req_headers)
+        req_url = response.request.url
+        print(req_url)
+        req_body = response.request.body
+        print(req_body)
+
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("HTTP error! ... ", http_err)
     except Exception as err:            # ... 可能格式根本就是錯的？
