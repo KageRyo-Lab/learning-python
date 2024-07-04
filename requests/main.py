@@ -126,6 +126,11 @@ for url in api_urls:
         response = requests.get("https://api.github.com/user")
         print(response.status_code)
 
+        # SSL
+        print()
+        # 如果關閉 SSL 驗證，會出現 InsecureRequestWarning 警告
+        requests.get("https://api.github.com", verify=False)
+
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("\nHTTP error! ... ", http_err)
     except Exception as err:            # ... 可能格式根本就是錯的？
