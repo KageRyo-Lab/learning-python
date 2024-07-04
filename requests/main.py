@@ -59,6 +59,26 @@ for url in api_urls:
         print()
         print(first_repo["text_matches"][0]["matches"],"\n")
 
+        # Other HTTP Methods (POST, PUT, DELETE, ...)
+        # POST
+        response = requests.post("https://httpbin.org/post", data={"key": "value"})
+        print(response.json())
+        # PUT
+        response = requests.put("https://httpbin.org/put", data={"key": "value"})
+        print(response.json())
+        # DELETE
+        response = requests.delete("https://httpbin.org/delete")
+        print(response.json())
+        # HEAD
+        response = requests.head("https://httpbin.org/get")
+        print(response.json())
+        # PATCH
+        response = requests.patch("https://httpbin.org/patch", data={"key": "value"})
+        print(response.json())
+        # OPTIONS
+        response = requests.options("https://httpbin.org/get")
+        print(response.json())
+
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("HTTP error! ... ", http_err)
     except Exception as err:            # ... 可能格式根本就是錯的？
