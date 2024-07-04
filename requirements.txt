@@ -1,0 +1,23 @@
+# pytest & plugins
+pytest==7.2.1
+pytest-xdist~=3.2.0
+coverage~=7.1.0
+black~=23.1.0
+pytest-timeout~=2.1.0
+pytest-env~= 0.8.1
+pytest-html~=3.2.0
+pytest-mock~=3.10.0
+pytest-sugar~=0.9.6
+pytest-random-order~=1.1.0
+pytest-flake8~=1.0.7
+flake8~=6.0.0
+pytest-tldr==0.2.5
+pytest-profiling~=1.7.0
+pytest-stress~=1.0.1
+pytest-clarity~=1.0.1
+
+# requests
+requests
+
+# pydantic
+pydantic
