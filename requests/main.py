@@ -29,6 +29,22 @@ for url in api_urls:
         headers = response.headers
         print(headers, "\ntype: ", headers["content-type"])
 
+        # Query String Parameters
+        # 搜尋 Python 語言的 repository，按照 stars 來排序
+        response = requests.get(
+                    "https://api.github.com/search/repositories",
+                    params={"q": "language:python", "sort": "stars", "order": "desc"})
+        # 取得 response 的內容，並印出前三個 repository 的名稱、描述、星星數、連結
+        json_response = response.json()
+        popular_repo = json_response["items"]
+        print()
+        for repo in popular_repo[:3]:
+            print("Repository Name:", repo["name"])
+            print("Description:", repo["description"])
+            print("Stars:", repo["stargazers_count"])
+            print("URL:", repo["html_url"])
+            print("-" * 50)
+
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("HTTP error! ... ", http_err)
     except Exception as err:            # ... 可能格式根本就是錯的？
