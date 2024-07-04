@@ -122,6 +122,9 @@ for url in api_urls:
         print(response.json())
         print(response.status_code)
         print(response.request.headers["Authorization"])
+        # 在沒有提供正確的帳號密碼時或沒有憑證時，會出現 401 錯誤
+        response = requests.get("https://api.github.com/user")
+        print(response.status_code)
 
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("\nHTTP error! ... ", http_err)
