@@ -80,16 +80,19 @@ for url in api_urls:
         print(response.headers) # 只會有 headers
 
         # The Message Body
+        print()
         # POST
         response = requests.post("https://httpbin.org/post", data={"key": "value"})
         json_response = response.json()
-        json_response["data"]
-        json_response["headers"]["Content-Type"]
+        print(json_response["data"], "\n", json_response["headers"]["Content-Type"])
         # PUT
-        requests.put("https://httpbin.org/put", data={"key": "value"})
+        response = requests.put("https://httpbin.org/put", data={"key": "value"})
+        json_response = response.json()
+        print(json_response["data"], "\n", json_response["headers"]["Content-Type"])
         # PATCH
-        requests.patch("https://httpbin.org/patch", data={"key": "value"})
-
+        response = requests.patch("https://httpbin.org/patch", data={"key": "value"})
+        json_response = response.json()
+        print(json_response["data"], "\n", json_response["headers"]["Content-Type"])
 
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("HTTP error! ... ", http_err)
