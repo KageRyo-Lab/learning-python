@@ -1,5 +1,6 @@
 import requests
 from requests.exceptions import HTTPError
+from requests.auth import HTTPBasicAuth
 
 # 取得 API 連結
 api_urls = ["https://api.github.com"]
@@ -105,9 +106,29 @@ for url in api_urls:
         req_body = response.request.body
         print(req_body)
 
+        # Authentication
+        print()
+        # Basic Authentication
+        response = requests.get("https://httpbin.org/basic-auth/user/passwd", 
+                                auth=("user", "passwd")
+                                )
+        print(response.json())
+        print(response.status_code)
+        print(response.request.headers["Authorization"])
+        # Basic Authentication (HTTPBasicAuth)
+        response = requests.get("https://httpbin.org/basic-auth/user/passwd", 
+                                auth=HTTPBasicAuth("user", "passwd")
+                                )
+        print(response.json())
+        print(response.status_code)
+        print(response.request.headers["Authorization"])
+        # 在沒有提供正確的帳號密碼時或沒有憑證時，會出現 401 錯誤
+        response = requests.get("https://api.github.com/user")
+        print(response.status_code)
+
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
-        print("HTTP error! ... ", http_err)
+        print("\nHTTP error! ... ", http_err)
     except Exception as err:            # ... 可能格式根本就是錯的？
-        print("Other Error! ... ", err)
+        print("\nOther Error! ... ", err)
     else:
-        print("Success!")               # 都沒出錯 -> Success! (200)
+        print("\nSuccess!")               # 都沒出錯 -> Success! (200)
