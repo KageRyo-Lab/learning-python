@@ -33,7 +33,8 @@ for url in api_urls:
         # 搜尋 Python 語言的 repository，按照 stars 來排序
         response = requests.get(
                     "https://api.github.com/search/repositories",
-                    params={"q": "language:python", "sort": "stars", "order": "desc"})
+                    params={"q": "language:python", "sort": "stars", "order": "desc"}
+                    )
         # 取得 response 的內容，並印出前三個 repository 的名稱、描述、星星數、連結
         json_response = response.json()
         popular_repo = json_response["items"]
@@ -44,6 +45,19 @@ for url in api_urls:
             print("Stars:", repo["stargazers_count"])
             print("URL:", repo["html_url"])
             print("-" * 50)
+
+        # Request Headers
+        # 搜尋 Python 語言的 repository，只接受 text-match+json 格式的 response
+        response = requests.get(
+                    "https://api.github.com/search/repositories",
+                    params={"q": '"real python"'},                                  # 搜尋 "real python"
+                    headers={"Accept": "application/vnd.github.text-match+json"}    # 只接受 text-match+json 格式的 response
+                    )
+        # 取得 response 的內容，並印出第一個 repository 的 text_matches
+        json_response = response.json()         # 將 response 的內容轉換成 json 格式
+        first_repo = json_response["items"][0]  # 取得第一(0)個 repository
+        print()
+        print(first_repo["text_matches"][0]["matches"],"\n")
 
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("HTTP error! ... ", http_err)
