@@ -1,5 +1,5 @@
 import pytest
-from app.card2 import compare_cards
+from app.card import compare_cards
 
 def tests_compare_cards():
     assert compare_cards('A', 'K') == 'A'
