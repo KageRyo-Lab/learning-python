@@ -1,5 +1,6 @@
 import requests
 from requests.exceptions import HTTPError
+from requests.auth import HTTPBasicAuth
 
 # 取得 API 連結
 api_urls = ["https://api.github.com"]
@@ -110,6 +111,13 @@ for url in api_urls:
         # Basic Authentication
         response = requests.get("https://httpbin.org/basic-auth/user/passwd", 
                                 auth=("user", "passwd")
+                                )
+        print(response.json())
+        print(response.status_code)
+        print(response.request.headers["Authorization"])
+        # Basic Authentication (HTTPBasicAuth)
+        response = requests.get("https://httpbin.org/basic-auth/user/passwd", 
+                                auth=HTTPBasicAuth("user", "passwd")
                                 )
         print(response.json())
         print(response.status_code)
