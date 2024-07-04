@@ -1,6 +1,7 @@
 import requests
-from requests.exceptions import HTTPError
+from requests.exceptions import HTTPError, Timeout, RetryError
 from requests.auth import HTTPBasicAuth
+from requests.adapters import HTTPAdapter
 
 # 取得 API 連結
 api_urls = ["https://api.github.com"]
@@ -130,6 +131,32 @@ for url in api_urls:
         print()
         # 如果關閉 SSL 驗證，會出現 InsecureRequestWarning 警告
         requests.get("https://api.github.com", verify=False)
+
+        # Performance
+        print()
+        # Timeouts
+        # 透過 timeout 參數設定 request 的 timeout 時間
+        response = requests.get("https://api.github.com", timeout=1)
+        print(response)
+        # 也可以加上 exceptions 來處理 timeout 的錯誤
+        try:
+            response = requests.get("https://api.github.com", timeout=(3.05, 5))
+            print(response)
+        except Timeout as timeout_err:
+            print("Timeout error! ... ", timeout_err)
+        else:
+            print("No Timeout, It's good! ... 200 OK")
+        # Max Retries
+        # 透過 Retry 來設定最大重試次數
+        github_adapter = HTTPAdapter(max_retries=2)             # HTTPAdapter 用來設定最大重試次數
+        session = requests.Session()                            # 建立 session
+        session.mount("https://api.github.com", github_adapter) # 將 github_adapter 掛載到 session 上
+        try:
+            session.get("https://api.github.com")
+        except RetryError as retry_err:
+            print("Retry error! ... ", retry_err)
+        finally:
+            session.close()
 
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("\nHTTP error! ... ", http_err)
