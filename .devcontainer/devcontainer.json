@@ -11,6 +11,5 @@
     "settings": {
       "python.pythonPath": "/usr/local/bin/python"
     },
-    "remoteUser": "vscode",
     "workspaceFolder": "/workspace"
   }
