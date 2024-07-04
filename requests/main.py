@@ -105,9 +105,19 @@ for url in api_urls:
         req_body = response.request.body
         print(req_body)
 
+        # Authentication
+        print()
+        # Basic Authentication
+        response = requests.get("https://httpbin.org/basic-auth/user/passwd", 
+                                auth=("user", "passwd")
+                                )
+        print(response.json())
+        print(response.status_code)
+        print(response.request.headers["Authorization"])
+
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
-        print("HTTP error! ... ", http_err)
+        print("\nHTTP error! ... ", http_err)
     except Exception as err:            # ... 可能格式根本就是錯的？
-        print("Other Error! ... ", err)
+        print("\nOther Error! ... ", err)
     else:
-        print("Success!")               # 都沒出錯 -> Success! (200)
+        print("\nSuccess!")               # 都沒出錯 -> Success! (200)
