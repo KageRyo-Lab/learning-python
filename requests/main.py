@@ -68,16 +68,16 @@ for url in api_urls:
         print(response.json())
         # DELETE
         response = requests.delete("https://httpbin.org/delete")
-        print(response.json())
+        print(response) # Delete 只會有成功或失敗的訊息
         # HEAD
         response = requests.head("https://httpbin.org/get")
-        print(response.json())
+        print(response.headers) # 只會有 headers
         # PATCH
         response = requests.patch("https://httpbin.org/patch", data={"key": "value"})
-        print(response.json())
+        print(response.json()) 
         # OPTIONS
         response = requests.options("https://httpbin.org/get")
-        print(response.json())
+        print(response.headers) # 只會有 headers
 
     except HTTPError as http_err:       # ... 可能根本沒這個頁面或是其他和網頁有關的問題
         print("HTTP error! ... ", http_err)
