@@ -25,13 +25,13 @@ try:
     colleges = webcontainer.find_all('div', class_='col-md-4')
     for college in colleges:
         col_name = college.find('h2').get_text(strip=True)
-        print(f"學院: {col_name}")
+        print(f"【{col_name}】")
         
         # 尋找學院底下的系所
         departments = college.find_all('li', class_='con_li')
         for dpt in departments:
             dpt_name = dpt.get_text(strip=True)
-            print(f"{dpt_name}")
+            print(f"．{dpt_name}")
         print()
 
 except (AttributeError, ValueError) as e:
