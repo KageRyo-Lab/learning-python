@@ -1,5 +1,11 @@
 import logging
 
+# 設定 logging 的 format
+logging.basicConfig(
+    format="[%(asctime)s][%(name)-5s][%(levelname)-5s] %(message)s (%(filename)s:%(lineno)d)",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
 # 基礎 Root Logger
 # 比較簡單的方式
 logging.basicConfig(level=logging.INFO)     # 設定 Root Logger 為 INFO
