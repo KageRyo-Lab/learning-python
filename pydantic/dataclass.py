@@ -16,4 +16,6 @@ class Member:
     email: str
 
 member1 = Member('abbc','0900123456','abbc@gmail.com')
+member2 = Member('people','0912345678','peo@yahoo.com.tw')
 member_logger.info(member1)
+member_logger.info(member2)
