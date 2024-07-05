@@ -31,3 +31,9 @@ main_logger.addHandler(file_handler)
 # log messages
 main_logger.info('main info')   # 由於剛剛建立的 FileHandler，所以這行會被寫入 log.txt
 sub_logger.debug('sub debug')   # 由於 main Logger 為 INFO，所以這行不會顯示和寫入 log.txt
+
+# Log Traceback
+try:
+    1 / 0   # 刻意製造一個錯誤（ZeroDivisionError）
+except:
+    main_logger.error("Error", exc_info=True)
