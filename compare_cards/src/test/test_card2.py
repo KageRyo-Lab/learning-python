@@ -1,7 +1,7 @@
 import pytest
 from app.card import compare_cards
 
-def tests_compare_cards():
+def test_compare_cards():
     assert compare_cards('A', 'K') == 'A'
     assert compare_cards('5', '10') == '10'
     assert compare_cards('J', 'Q') == 'Q'
