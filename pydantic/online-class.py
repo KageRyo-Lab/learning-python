@@ -31,16 +31,9 @@ def main():
         'starttime': '2024-08-05 09:00',
         'endtime': '2024-08-09 17:00'
     }
-    data2 = {
-        'id': 2,
-        'name': '機器學習',
-        'price': 15000,
-        'starttime': '2024-08-12 09:00',
-        'endtime': '2024-08-19 17:00'
-    }
 
     try:
-        online_class = OnlineClass(**data1)
+        online_class = OnlineClass(**data)
         class_logger.info(online_class)
     except ValidationError as e:
         class_logger.error(e.errors())
