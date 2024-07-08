@@ -22,7 +22,9 @@ def setup_logging():
 def main():
     m_logger = setup_logging()
     # 創建 Delivery 實例並記錄日誌
-    m = Delivery(timestamp='2020-01-01T03:04:05Z', dimensions=(10, 20))
+    m = Delivery(timestamp='2020-01-01T03:04:05Z', dimensions=['10', '20'])
+                                                    # 為什麼這裡打錯型態還可以執行呢？
+                                                    # 因為 Pydantic 會自動轉換型態
     m_logger.info(repr(m.timestamp))
     m_logger.info(m.dimensions)
 
