@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ValidationError
+from requests import HTTPError, RequestException
 import requests
 import logging
 
@@ -26,10 +27,7 @@ def main():
     # 呼叫 API 取得資料
     api_url = 'https://jsonplaceholder.typicode.com/posts/1'
     response = requests.get(api_url)
-    if response.status_code != 200:
-        api_logger.error(f'API status: {response.status_code}')
-        return
-    else: 
+    try: 
         api_logger.info(f'API status: {response.status_code}')
         data = response.json()
 
@@ -39,6 +37,12 @@ def main():
             api_logger.info(api_response)
         except ValidationError as e:
             api_logger.error(e.errors())
+    except HTTPError as http_err:
+        api_logger.error(f'HTTP error occurred: {http_err}')
+    except RequestException as req_err:
+        api_logger.error(f'Error occurred during API request: {req_err}')
+    except Exception as err:
+        api_logger.error(f'Unexpected error occurred: {err}')
 
 if __name__ == '__main__':
     main()
