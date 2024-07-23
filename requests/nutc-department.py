@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup as bs
 url = 'https://www.nutc.edu.tw/p/404-1000-108697.php'
 
 try:
-    # 發送 GET 請求取得網頁內容，並忽略 SSL 驗證問題
-    response = requests.get(url, verify=False)
+    # 發送 GET 請求取得網頁內容
+    response = requests.get(url)
     response.raise_for_status()  # 如果請求失敗，會拋出異常
 except requests.exceptions.RequestException as e:
     print(f"Error: {e}")

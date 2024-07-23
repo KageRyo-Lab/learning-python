@@ -130,7 +130,8 @@ for url in api_urls:
         # SSL
         print()
         # 如果關閉 SSL 驗證，會出現 InsecureRequestWarning 警告
-        requests.get("https://api.github.com", verify=False)
+        requests.get("https://api.github.com")
+        # verify=False 關閉 SSL 驗證
 
         # Performance
         print()
